@@ -3,23 +3,27 @@
 .app__dashboard-page {
   height: 100vh;
   width: 100%;
-  background-color: $gray;
+  background-color: wheat;
   display: flex;
   flex-direction: row;
   position: relative;
 
 
   .dashboard__content {
-    height: inherit;
-    flex: 1;
-
-    &-heading {
-      padding: 29px 224px;
-      font-size: 20px;
-      color: orange;
-    }
-
-
-
+      position: fixed;
+      top: 0;
+      left: 200px;
+      bottom: 0;
+      right: 0;
+      padding: 30px 0px 0px 24px;
+  
+      &__container {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        position: relative;
+      }
   }
 }

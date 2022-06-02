@@ -6,10 +6,11 @@ import ForgotPasswordForm from "./Components/Forms/ForgotPassword-form/ForgotPas
 import LoginForm from "./Components/Forms/Login-form/LoginForm";
 import DashboardPage from "./Pages/Dashboard/DashboardPage";
 import LoginPage from "./Pages/Login/LoginPage";
+import Dashboard from "./Components/Layout/Dashboard/Dashboard";
+import Device from "./Components/Layout/Device/Device";
+import UserInfo from "./Components/Layout/UserInfo/UserInfo";
 
 const App: React.FC = () => {
-
-
   return (
     <div className="App">
       <Routes>
@@ -18,8 +19,10 @@ const App: React.FC = () => {
           <Route path="forgot-password" element={<ForgotPasswordForm/>} />
           <Route path="edit-password" element={<EditPasswordForm/>}/>
         </Route>
-        <Route path="/dashboard" element={<DashboardPage/>}>
-
+        <Route path="/dashboard" element={<DashboardPage />}>
+          <Route path="panel" element={<Dashboard/>}/>
+          <Route path="device" element={<Device/>} />
+          <Route path="user-info" element={<UserInfo/>} />
         </Route>
       </Routes>
 
