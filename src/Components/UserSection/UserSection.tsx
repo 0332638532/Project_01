@@ -4,7 +4,7 @@ import Bell from "../../Assets/Bell";
 import { useNavigate } from "react-router";
 
 const imgUrl =
-  "https://scontent.fsgn5-1.fna.fbcdn.net/v/t1.6435-9/192575913_3252690818311551_3507076349013219620_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=19026a&_nc_ohc=_F8-R_1KLQoAX_9KYyD&_nc_oc=AQl8wLKblTP4okVRUl4Ug7vvQF3iggTG5sH81lz0DLYbeEv065dkxTLUyg_JngUP4kI-mFW3ohEGc8Jl0PGIHGfq&_nc_ht=scontent.fsgn5-1.fna&oh=00_AT_nDAYogb3YxY2qnGPMnw722DAONF98gd9a1kBjpfcXKQ&oe=62BE46D2";
+  "https://scontent.fsgn5-1.fna.fbcdn.net/v/t1.6435-9/192575913_3252690818311551_3507076349013219620_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=19026a&_nc_ohc=bbHcgf3pFlUAX-f0utk&_nc_oc=AQm5zqPi_BJs7R0jwRc1gUAP07fmMv4do9QBe7opvPcqdet_cmndN6U79o-cgmDAafX1KNJ2LU_zkz1YqHUH_ual&_nc_ht=scontent.fsgn5-1.fna&oh=00_AT_CAYGtIWjuXFwDry2fD0Kic6Hit-UTDbbqPnPvgXBahQ&oe=62C23B52";
 const notifications = [
   { user: "Phạm Văn Khánh", content: "12h30 ngày 31/2/2020" },
   { user: "Nguyễn Thanh Sơn", content: "12h30 ngày 31/2/2020" },
