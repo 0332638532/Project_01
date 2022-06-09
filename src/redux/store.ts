@@ -4,7 +4,7 @@ import userSlice from './Userslice';
 // ...
 const store = configureStore({
   reducer: {
-    user: userSlice
+    user: userSlice,
   },
   // composeWithDevTools() ,
 })

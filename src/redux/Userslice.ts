@@ -14,13 +14,14 @@ const initialState: userInfo = {
 
 };
 
-export const userSlice = createSlice({
-  name: 'user',
-  initialState,
-  reducers: {
-  },
-});
+  export const userSlice = createSlice({
+    name: 'user',
+    initialState,
+    reducers: {
+    },
+  });
 
-export const { } = userSlice.actions;
+  // To able to use reducers we need to export them.
+  export const { } = userSlice.actions;
 
-export default userSlice.reducer;
+  export default userSlice.reducer;
