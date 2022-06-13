@@ -1,4 +1,4 @@
-@import "../../scss/color";
+@import '../../scss/color';
 
 .app__text-box {
   width: 100%;
@@ -24,9 +24,8 @@
       box-sizing: border-box;
       border-radius: 10px;
       border: solid 1px $text-box-border;
-
-
-
+      height: 44px;
+      border: 1.5px solid #d4d4d7;
 
       &:focus {
         outline: rgba($color: blue, $alpha: 0.3);

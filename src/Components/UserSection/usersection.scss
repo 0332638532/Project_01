@@ -1,4 +1,4 @@
-@import "../../scss/color";
+@import '../../scss/color';
 
 .app__user-section {
      position: absolute;
@@ -30,8 +30,7 @@
                border-radius: 10px;
                top: 67px;
                box-shadow: 2px 2px 15px rgba(70, 64, 67, 0.1);
-               left: -96px;
-
+               left: -64px;
 
                &__header {
                     height: 48px;
@@ -72,7 +71,6 @@
                               border-radius: 0 0 10px 10px;
                          }
 
-
                          &:hover {
                               background-color: rgba($color: $orange, $alpha: 0.3);
                          }
@@ -98,7 +96,7 @@
 
           svg {
                path {
-                    fill: #fff
+                    fill: #fff;
                }
           }
      }
