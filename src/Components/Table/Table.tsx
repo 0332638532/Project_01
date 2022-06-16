@@ -3,6 +3,8 @@ import Pagination from '../Pagination/Pagination';
 import './table.scss';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+
 export enum DeviceActiveStatus {
   Active = 'Hoạt động',
   Inactive = 'Ngưng hoạt động',
@@ -11,6 +13,12 @@ export enum DeviceConnectionStatus {
   Connecting = 'Kết nối',
   Disconnected = 'Mất kết nối',
 }
+export enum QueueStatus {
+  pending = "Đang chờ",
+  used = "Đã sử dụng",
+  aborted = "Đã huỷ",
+}
+
 export enum Service {
   Heart = 'Tim mạch',
   Obstetric = 'Sản phụ khoa',
@@ -25,20 +33,48 @@ export enum ColumnLabels {
   isActivated = 'Trạng thái hoạt động',
   isConnected = 'Trạng thái kết nối',
   services = 'Dịch vụ sử dụng',
-  displayDetail = 'Chi tiết',
-  displayUpdate = 'Cập nhật',
+  serviceId = 'Mã dịch vụ',
+  serviceName = 'Tên dịch vụ',
+  serviceDescribe = 'Chi tiết dịch vụ',
+  no = 'STT',
+  customerName = 'Tên khách hàng',
+  grantTime = 'Thời gian cấp',
+  expireTime = 'Hạn sử dụng',
+  queueStatus = 'Trạng thái',
+  provideBy = 'Nguồn cấp',
 }
 
 export enum DisplayedColumns {
-  deviceId,
-  deviceName,
-  ipAddress,
-  isActivated,
-  isConnected,
-  services,
-  displayDetail,
-  displayUpdate,
+  deviceId = 'deviceId',
+  deviceName = 'deviceName',
+  ipAddress = 'ipAddress',
+  isActivated = 'isActivated',
+  isConnected = 'isConnected',
+  services = 'services',
+  displayDetail = 'displayDetail',
+  displayUpdate = 'displayUpdate',
+  serviceId = 'serviceId',
+  serviceName = 'serviceName',
+  serviceDescribe = 'serviceDescribe',
+  serviceUpdate = 'serviceUpdate',
+  serviceDetail = 'serviceDetail',
+  no = 'no',
+  customerName = 'customerName',
+  grantTime = 'grantTime',
+  expireTime = 'expireTime',
+  queueStatus = 'queueStatus',
+  provideBy = 'provideBy',
+  queueDetail = 'queueDetail',
 }
+
+// export enum ServiceColumns {
+//   serviceId,
+//   serviceName,
+//   serviceDetail,
+//   isActivated,
+//   displayDetail,
+//   displayUpdate,
+// }
 
 export interface IDeviceRow {
   deviceId: string;
@@ -51,9 +87,33 @@ export interface IDeviceRow {
   displayUpdate: boolean;
 }
 
+export interface IServiceRow {
+  serviceId: string;
+  serviceName: string;
+  serviceDescribe: string;
+  isActivated: boolean;
+  serviceDetail: boolean;
+  serviceUpdate: boolean;
+}
+
+export interface IQueueRow {
+  no: number;
+  customerName: string;
+  serviceName: string;
+  grantTime: Date;
+  expireTime: Date;
+  queueStatus: QueueStatus;
+  provideBy: string;
+  queueDetail: boolean;
+}
+
+export interface IServiceQueue {
+  no: number;
+  queueStatus: QueueStatus;
+}
 type T = keyof typeof ColumnLabels;
 
-const Table: React.FC<{ data: IDeviceRow[]; displayRow?: number }> = ({
+const Table: React.FC<{ data:Array<any>; displayRow?: number }> = ({
   data,
   displayRow,
 }) => {
@@ -75,15 +135,16 @@ const Table: React.FC<{ data: IDeviceRow[]; displayRow?: number }> = ({
       setPaginationData([]);
       // setPaginationIndex(0);
     };
-  }, [paginationIndex]);
+  }, [paginationIndex, data, displayRow]);
 
   const changeIndex = (index: number) => {
     setPaginationIndex(index);
   };
 
   return (
-    <div className="app__table">
+    <div className='app__table'>
       <table>
+        {/* {Object.keys(data[0]).toString().includes('serviceId').toString()} */}
         <thead>
           <tr>
             {Object.keys(paginationData[0]).map((column: string) => {
@@ -95,65 +156,97 @@ const Table: React.FC<{ data: IDeviceRow[]; displayRow?: number }> = ({
           {paginationData.map((row) => {
             return (
               <tr>
-                {Object.values(row).map((value, index) => {
-                  if (index === DisplayedColumns.displayDetail) {
+               {Object.entries(row).map((entry: any) => {
+                  if (entry[0] === DisplayedColumns.isActivated) {
                     return (
                       <td>
-                        <a href="#">{value === true && `Chi tiết`}</a>
-                      </td>
-                    );
-                  }
-                  if (index === DisplayedColumns.displayUpdate) {
-                    return (
-                      <td>
-                        <a href="#">{value === true && `Cập nhật`}</a>
-                      </td>
-                    );
-                  }
-                  if (index === DisplayedColumns.isActivated) {
-                    return (
-                      <td>
-                        <div className="row">
+                        <div className='row'>
                           <div
-                            className={`status-dot ${
-                              value ? `active` : `inactive`
-                            }`}
+                            className={`status-dot ${entry[1] ? `active` : `inactive`
+                              }`}
                           ></div>
                           <span>
-                            {value ? 'Đang hoạt động' : 'Ngưng hoạt động'}
+                            {entry[1] ? 'Đang hoạt động' : 'Ngưng hoạt động'}
                           </span>
                         </div>
                       </td>
                     );
                   }
-                  if (index === DisplayedColumns.isConnected) {
+                  if (entry[0] === DisplayedColumns.isConnected) {
                     return (
                       <td>
-                        <div className="row">
+                        <div className='row'>
                           <div
-                            className={`status-dot ${
-                              value ? `active` : `inactive`
-                            }`}
+                            className={`status-dot ${entry[1] ? `active` : `inactive`
+                              }`}
                           ></div>
-                          <span>{value ? 'Kết nối' : 'Mất kết nối'}</span>
+                          <span>{entry[1] ? 'Kết nối' : 'Mất kết nối'}</span>
                         </div>
                       </td>
                     );
-                  } else {
+                  }
+                  if (entry[0] === DisplayedColumns.serviceDetail) {
                     return (
                       <td>
-                        <span className={`status-dot`}></span>
-                        <span>{value}</span>
+                        <Link to={'/dashboard/service/detail'}>Chi tiết</Link>
                       </td>
                     );
                   }
+                  if (entry[0] === DisplayedColumns.serviceUpdate) {
+                    return (
+                      <td>
+                        <Link to={'/dashboard/service/modify'}>Cập nhật</Link>
+                      </td>
+                    );
+                  }
+                  if (entry[0] === DisplayedColumns.displayDetail) {
+                    return (
+                      <td>
+                        <Link to={'/dashboard/device/detail'}>Chi tiết</Link>
+                      </td>
+                    );
+                  }
+                  if (entry[0] === DisplayedColumns.displayUpdate) {
+                    return (
+                      <td>
+                        <Link to={'/dashboard/device/modify'}>Cập nhật</Link>
+                      </td>
+                    );
+                  }
+                  if (entry[0] === DisplayedColumns.queueStatus) {
+                    return (
+                      <td>
+                        <div className='row'>
+                          <div
+                            className={`status-dot ${entry[1] === QueueStatus.pending && `active`
+                              } ${entry[1] === QueueStatus.used && `inactive`
+                              } ${entry[1] === QueueStatus.aborted && `inactive`
+                              }`}
+                          ></div>
+                          <span>
+                            {entry[1] === QueueStatus.pending && 'Đang hoạt động'}
+                            {entry[1] === QueueStatus.used && 'Hoàn thành'}
+                            {entry[1] === QueueStatus.aborted && 'Vắng'}
+                          </span>
+                        </div>
+                      </td>
+                    );
+                  }
+                  if (entry[0] === DisplayedColumns.queueDetail) {
+                    return (
+                      <td>
+                        <Link to={'/dashboard/queue/detail'}>Chi tiết</Link>
+                      </td>
+                    );
+                  }
+                  return <td>{entry[1]}</td>;
                 })}
               </tr>
             );
           })}
         </tbody>
       </table>
-      <div className="pagination">
+      <div className='pagination'>
         <Pagination
           data={data}
           displayRow={displayRow ? displayRow : 9}
@@ -163,5 +256,4 @@ const Table: React.FC<{ data: IDeviceRow[]; displayRow?: number }> = ({
     </div>
   );
 };
-
 export default Table;

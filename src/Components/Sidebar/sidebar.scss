@@ -60,6 +60,27 @@
         justify-content: center;
       }
     }
+        .selected {
+          background-color: rgba($color: $orange, $alpha: 1);
+          color: $background;
+    
+          svg {
+            path {
+              stroke: $background;
+            }
+          }
+    
+          &:hover {
+            cursor: pointer;
+            background-color: rgba($color: $orange, $alpha: 1);
+    
+            svg {
+              path {
+                stroke: $background;
+              }
+            }
+          }
+        }
   }
 
   &__sign-out {
