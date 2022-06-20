@@ -4,7 +4,8 @@ import Select from '../../../Select/Select';
 import Table from '../../../Table/Table';
 import Textbox, { InputType } from '../../../Textbox/Textbox';
 import './detailservice.scss';
-import { ReactComponent as AddIc } from '../../../../Assets/add-square.svg';
+import { ReactComponent as UpdateIc } from '../../../../Assets/update.svg';
+import { ReactComponent as ReturnIc } from '../../../../Assets/return.svg';
 import { queueList } from '../../../Mock';
 
 const DetailService: React.FC = () => {
@@ -57,10 +58,19 @@ const DetailService: React.FC = () => {
         className="app__layout-service__add-service-btn"
         onClick={() => navigate('/dashboard/device/new')}
       >
-        <span>
-          <AddIc />
-        </span>
-        <span>Cập nhật danh sách</span>
+        <div className="btn-update" onClick={() => navigate('/dashboard/service/modify')}>
+          <span>
+            <UpdateIc />
+          </span>
+          <span>Cập nhật danh sách</span>
+        </div>
+
+        <div className="btn-return" onClick={() => navigate('/dashboard/service/list')}>
+          <span>
+            <ReturnIc />
+          </span>
+          <span>Quay lại</span>
+        </div>
       </div>
     </div>
   );

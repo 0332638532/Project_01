@@ -8,9 +8,10 @@ import { ReactComponent as AddIc } from '../../../../Assets/add-square.svg';
 import {
   activeStatus,
   connectionStatus,
-  deviceList,
+  queueTable,
   queueProvider,
   services,
+  queueStatus
 } from '../../../Mock';
 import DatePicker from '../../../DatePicker/DatePicker';
 
@@ -31,8 +32,8 @@ const ListQueue: React.FC = () => {
               //   width={300}
             />
             <Select
-              label="Trạng thái kết nối"
-              options={connectionStatus}
+              label="Tình trạng"
+              options={queueStatus}
               flexItem
               //   width={300}
             />
@@ -46,7 +47,7 @@ const ListQueue: React.FC = () => {
             <Textbox label="Từ khoá" type={InputType.search} flexItem/>
           </div>
           <div className="row table">
-            <Table data={deviceList} displayRow={9} />
+            <Table data={queueTable} displayRow={9} />
           </div>
         </div>
       </div>
